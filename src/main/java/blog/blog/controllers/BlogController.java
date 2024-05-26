@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/blog")
+@CrossOrigin(origins = "*")
 public class BlogController {
     @Autowired
     private PostRepository postRepository;
@@ -26,5 +27,10 @@ public class BlogController {
     @PostMapping
     public PostEntity createPost(@RequestBody PostEntity post) {
         return postRepository.save(post);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePost(@PathVariable Long id) {
+        postRepository.deleteById(id);
     }
 }
